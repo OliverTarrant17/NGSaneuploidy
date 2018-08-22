@@ -1,5 +1,5 @@
 
-# NGSploidy
+# NGSaneuploidy
 
 Tool for inferring ploidy levels, testing for aneuploidy and localised CNV.
 
