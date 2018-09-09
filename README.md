@@ -53,7 +53,7 @@ Genotype likelihood data can be porcessed and analysed to detect cases of aneupl
 ### Inputs
 
 `Aneuploidy_Test.py` is run with the required arguments of:
-* `Input`: A gzipped mpileup file containing the data for the samples to be analysed
+* `Input`: name of a text file containing the suffix of each `.mpileup.gz` file used in analysis
 
 Additionally the following options are available:
 * `--window [-w]`: The size of the windows to be used in the analysis (number of SNPs per a window)
@@ -72,4 +72,64 @@ Outputted are resut in the form of a `.ploids` file that contains the following 
 
 ```Shell
 python Aneuploidy_Test.py names.filelist -w 100
+```
+
+## Application to cancer genetics
+It has been shown the CNV can promote the production and reoccurances of cancerous tumours. Testing patients all with tumours it is possible to look for genes displaying CNV across all samples for further study. By applying `Aneuploidy_cancer.py` to a genotype likelihoods file it is possible to do this. 
+
+### Inputs
+
+`Aneuploidy_Cancer.py` is run with the required arguments of:
+* `Input`: name of a text file containing the suffix of each `.mpileup.gz` file used in analysis
+
+Additionally the following options are available:
+* `--window [-w]`: The size of the windows to be used in the analysis (number of SNPs per a window). Choose to approximately match the size of genes of interest
+
+### Outputs
+
+In addition to the on screen outputs displayed from running `Aneuploidy_Test.py`  and production of `.ploids` file (see above) used in visualisations, additional onscreen results show a vector of the starting bases of the windows containing CNV across all samples
+
+
+### Syntax Example
+
+```Shell
+python Aneuploidy_Cancer.py names.filelist -w 100
+```
+
+## Visualising results
+There are four seperate ways to visulaise the results from the Aneuploidy test. These are:
+* `Visualise_multiple.R` where each samples is displayed individually showing the variation in genotype likelihood across the chromosome. All samples are compiled together in the format of a pdf with a page for each plot
+* `Visualise_individuals.R` Here tests from multiple chromosomes are compiled to demonstrate any changes in ploidy across the entire genome. Each sample is produces a pdf containing the normalised depths across the chromosomes with the inferred ploidy level for each
+* `Visualise_simulations.R` Identical to `Visualise_individuals.R` but optimised for use with simulated data
+* `Visualise_cancer.R` Specifically to be used to visualise the results of `Aneuploidy_Cancer.py`. Samples are aligned and localised window ploidies are displayed for a clear visualisation to check for consistent CNV across samples.
+
+### Inputs
+Inputs for all methods are similar and are as follows:
+
+#### `Visualise_multiple.R` 
+* `input` : name of a text file containing the suffix of each `.mpileup.gz` file used in analysis
+* `window` : The size of the windows used in the analysis (see `Anueploidy_Test.py`)
+
+#### `Visualise_individuals.R` 
+* `input` : name of a text file containing the suffix of each `.mpileup.gz` file used in analysis
+* `NSAMS` : The number of samples included in the analysis
+* `window` : The size of the windows used in the analysis (see `Anueploidy_Test.py`)
+
+#### `Visualise_simulations.R` 
+* `input` : name of a text file containing the suffix of each `.mpileup.gz` file used in analysis
+* `window` : The size of the windows used in the analysis (see `Anueploidy_Test.py`)
+
+
+#### `Visualise_cancer.R` 
+* `input` : name of a text file containing the suffix of each `.mpileup.gz` file used in analysis
+* `NSAMS` : The number of samples included in the analysis
+
+
+### Syntax Example
+
+```Shell
+Rscript Visualise_multiple.R names.filelist 100
+Rscript Visualise_individuals.R names.filelist 5 100
+Rscript Visualise_simulationsR names.filelist 100
+Rscript Visualise_cancer.R names.filelist 5
 ```
