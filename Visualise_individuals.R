@@ -172,12 +172,12 @@ for(i in 1:NSAMS){
                                   linetype = c(rep("blank", temp),"solid","dashed"),
                                   shape = c(rep(1, temp),NA,NA))))
   plot<-ggplot(data = data_to_plot) + xlim(0,genome_length) +ylim(0,max(data_to_plot$value)*1.2) # plot axis
-  plot <- plot + theme(legend.position = "top",plot.title = element_text(hjust = 0.5,size = 20,face="bold"),axis.text=element_text(size=14),axis.title=element_text(size=16,face="bold")) # sprt out axis
+  plot <- plot + theme(legend.position = "top",plot.title = element_text(hjust = 0.5,size = 20,face="bold"),axis.text=element_text(size=14),axis.title=element_text(size=16,face="bold"),legend.text = element_text(size=10),legend.title = element_text(size=12)) # sprt out axis
   plot <- plot + geom_point(data=data_to_plot,aes(x=c(1:length(data_to_plot$value)),y=data_to_plot$value/Meandepth,colour=factor(expected_ploidy)),alpha=1/8)
   plot <- plot + ggtitle("Predicted ploidies vs depth") + ylab("Normalised Depth") # add titles
-  plot <- plot + geom_line(data = data_to_plot,aes(x=c(1:length(data_to_plot$value)),y=data_to_plot$ploidy_num*normalised_haploid,colour="Inferred ploidy"), size=1) # plot inferred ploidy
+  plot <- plot + geom_line(data = data_to_plot,aes(x=c(1:length(data_to_plot$value)),y=data_to_plot$ploidy_num*normalised_haploid,colour="Chromosome inferred ploidy"), size=1) # plot inferred ploidy
   plot <- plot + geom_line(data = data_to_plot,aes(x=c(1:length(data_to_plot$value)),y=means/Meandepth,colour='Normalised mean depth'), size=0.6,linetype="dashed") +# plot inferred ploidy
-    guides(color=guide_legend("Localised Ploidy",override.aes = list(linetype = c(rep("blank", temp), "solid","dashed"),size=c(rep(2,temp),1,0.5),shape = c(rep(16, temp), NA,NA))))+colScale
+    guides(color=guide_legend("Localised Ploidy",override.aes = list(linetype = c(rep("blank", temp), "solid","dashed"),size=c(rep(2,temp),1,0.5),shape = c(rep(16, temp), NA,NA),alpha=1/2)))+colScale
   plot <- plot + facet_grid(.~data_to_plot$contig_num,scales = "free")#,shrink=FALSE,drop=FALSE)
   plot <- plot + scale_y_continuous('Normalised Depth', limits=c(0,normalised_haploid*max(data_to_plot$ploidy_num)+2), sec.axis = sec_axis(~./normalised_haploid,name = 'Inferred Ploidy',breaks = c(0:max(data_to_plot$expected_ploidy)+1))) # add 2nd y axis
   plot <- plot + scale_x_continuous(name = "Chromosome", breaks = cumsum(length_of_samples)-length_of_samples/2,labels = c(1:max(contig_num))) # change scale on x axis to samples
