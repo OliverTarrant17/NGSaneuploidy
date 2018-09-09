@@ -330,6 +330,7 @@ for g in list_of_inputs:
             temp_list.append(ExpectedPloidy[j][i])
         if len(set(temp_list))==1 and max(set(temp_list))!=Inferred_Ploidy:
             windows_of_interest.append(windows[i])
+    print("Starting bases of windows containing CNV across all samples")
     print(windows_of_interest)
             
 
