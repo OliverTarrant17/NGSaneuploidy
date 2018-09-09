@@ -133,3 +133,20 @@ Rscript Visualise_individuals.R names.filelist 5 100
 Rscript Visualise_simulationsR names.filelist 100
 Rscript Visualise_cancer.R names.filelist 5
 ```
+
+
+## Generating Simulated data
+NGS data can be simulated in the form an mpileup file by using `simulMpileu.R`. Not I do not own this script although I have edited it to allow for the inclusion of inbreeding. For full details on how to use the script please visit https://github.com/ImperialCollegeLondon/ngsJulia. 
+In addition to the arguments presented I have add the following compulsory argment:
+* `--inbreed`: The inbreeding coefficient per sample I.e the proportion of the population that is inbred from which each sample was extracted. Takes input in the same format as `--copy` e.g 0.2x3,0.1 is 0.2,0.2,0.2,0.1". 
+
+### Example 
+Simulated data has been provied for practice with the scripts. This can be found saved in the folder `Example` with the corresponding file containing their suffixes callsed `basenames_test` located in the main folder. Each simulation consists of 1 chromosome with 10 samples whose ploidy level is displayed in the fiel name. e.g. T1x4,3,4,1x3,2 consists of 4 haploids, a triploid, a tetraploid, 3 haploids and a diploid. 
+
+### Syntax example of using example data
+```Shell
+python Genotype_Likelihoods.py basenames_test -o ./Example 
+python Aneuploidy_Test.py basenames_test -w 100
+Rscript Visulalise_simulations.R basenames_test 100
+```
+
