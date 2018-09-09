@@ -147,6 +147,6 @@ Simulated data has been provied for practice with the scripts. This can be found
 ```Shell
 python Genotype_Likelihoods.py basenames_test -o ./Example 
 python Aneuploidy_Test.py basenames_test -w 100
-Rscript Visulalise_simulations.R basenames_test 100
+Rscript Visualise_simulations.R basenames_test 100
 ```
 
