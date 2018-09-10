@@ -1,7 +1,7 @@
 
 # NGSaneuploidy
 
-Tool for inferring ploidy levels, testing for aneuploidy and localised CNV.
+Tool for inferring ploidy levels, testing for aneuploidy and localised CNV from NGS data. Methods are applicable to polyploid species ranging from haploid to octaploid. 
 
 The following are required:
 
